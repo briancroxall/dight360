@@ -39,7 +39,7 @@ print('re.findall():', result_gerund)
 print('Number of gerunds:', len(result_gerund))
 
 # Agent Nouns
-agent_re = 
+agent_re = r'\w{2,}(or|er)\b'
 print('agent nouns regex:', agent_re)
 result_agent = re.findall(agent_re, words, re.I)
 print('re.findall():', result_agent)
