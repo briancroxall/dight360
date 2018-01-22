@@ -27,6 +27,25 @@ Assignment:
     You can simply paste a short text into a variable in your script.
 '''
 
+import re
+words = 'In a development that would have been hard to imagine a generation ago, when video games were poised to take over living rooms, board games are thriving. Overall, the latest available data shows that U.S. sales grew by 28 percent between the spring of 2016 and the spring of 2017. Revenues are expected to rise at a similar rate into the early 2020s—largely, says one analyst, because the target audience “has changed from children to adults,” particularly younger ones. Much of this success is traceable to the rise of games that, well, get those adults acting somewhat more like children. Clever, low-overhead card games such as Cards Against Humanity, Secret Hitler, and Exploding Kittens (“A card game for people who are into kittens and explosions”) have sold exceptionally well. Games like these have proliferated on Kickstarter, where anyone with a great idea and a contact at an industrial printing company can circumvent the usual toy-and-retail gatekeepers who green-light new concepts. (The largest project category on Kickstarter is “Games,” and board games make up about three-quarters of those projects.) Growth has also been particularly swift in the category of “hobby” board games, which comprises more sophisticated titles that are oriented toward older players—think Settlers of Catan. These games, compared to ones like Monopoly and Cards Against Humanity, represent a niche segment, but that segment is becoming something more than a niche: According to ICv2, a trade publication that covers board games, comic books, and other hobbyist products, sales of hobby board games in the U.S. and Canada increased from an estimated $75 million to $305 million between 2013 and 2016, the latest year for which data is available. Hobby-game fanaticism is still very much a subculture, to be sure, but it is a growing one. At the 2017 iteration of Gen Con—North America’s largest hobby-gaming convention, in Indianapolis—turnstile attendance topped 200,000. For the first time in the event’s history, all the attendee badges were purchased before the event began. Whether they knew it or not, the many thousands of people carpeting the field level of Lucas Oil Stadium wouldn’t be there if it weren’t for a small group of obsessives on the other side of the Atlantic.'
 
-a = 'In a development that would have been hard to imagine a generation ago, when video games were poised to take over living rooms, board games are thriving. Overall, the latest available data shows that U.S. sales grew by 28 percent between the spring of 2016 and the spring of 2017. Revenues are expected to rise at a similar rate into the early 2020s—largely, says one analyst, because the target audience “has changed from children to adults,” particularly younger ones. Much of this success is traceable to the rise of games that, well, get those adults acting somewhat more like children. Clever, low-overhead card games such as Cards Against Humanity, Secret Hitler, and Exploding Kittens (“A card game for people who are into kittens and explosions”) have sold exceptionally well. Games like these have proliferated on Kickstarter, where anyone with a great idea and a contact at an industrial printing company can circumvent the usual toy-and-retail gatekeepers who green-light new concepts. (The largest project category on Kickstarter is “Games,” and board games make up about three-quarters of those projects.) Growth has also been particularly swift in the category of “hobby” board games, which comprises more sophisticated titles that are oriented toward older players—think Settlers of Catan. These games, compared to ones like Monopoly and Cards Against Humanity, represent a niche segment, but that segment is becoming something more than a niche: According to ICv2, a trade publication that covers board games, comic books, and other hobbyist products, sales of hobby board games in the U.S. and Canada increased from an estimated $75 million to $305 million between 2013 and 2016, the latest year for which data is available. Hobby-game fanaticism is still very much a subculture, to be sure, but it is a growing one. At the 2017 iteration of Gen Con—North America’s largest hobby-gaming convention, in Indianapolis—turnstile attendance topped 200,000. For the first time in the event’s history, all the attendee badges were purchased before the event began. Whether they knew it or not, the many thousands of people carpeting the field level of Lucas Oil Stadium wouldn’t be there if it weren’t for a small group of obsessives on the other side of the Atlantic.'
-print(a)
+# Gerunds
+gerunds_re = r'\w{2,}ing'
+print('words:', words)
+print('test regex:', gerunds_re)
+result = re.findall(gerunds_re, words)
+print('re.findall():', result)
+print('Number of gerunds:', len(result))
+
+
+
+# Agent Nouns
+
+# Recipient Nouns
+
+# Other Nominalized verbs formed with suffixes
+
+# Zero-change nominalization
+
+
