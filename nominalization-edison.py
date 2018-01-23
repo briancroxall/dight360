@@ -59,9 +59,14 @@ print('Number of other nominalized verbs formed with suffixes:', len(result_othe
 print()
 
 # Zero-change nominalization
-zero = 
-
+zero_re = r'\b((M|m)urder|(U|u)se|(C|c)hange)\b' #Just using the three examples we are provided
+print('regex for zero-change:', zero_re)
+result_zero = re.findall(zero_re, words, re.I)
+print('re.findall():', result_zero)
+print('Number of zero-change nominalizations:', len(result_zero))
 print()
+
 # Conclusion
-print('Total number of nominalizations:',len(result_gerund) + len(result_agent) + len(result_recipient) + len(result_other))
+total = result_gerund + result_agent + result_recipient + result_other + result_zero
+print('Total number of nominalizations:',len(total))
 
