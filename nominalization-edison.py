@@ -17,19 +17,18 @@ Edison was a prolific inventor, holding 1,093 US patents in his name, as well as
 
 '''
 Assignment:
-    Use regular expressions and lists to correctly identify and count all of the nominalizations in a short text. 
+    Use regular expressions and lists to correctly identify and count all of the nominalizations in a short text.
     You can simply paste a short text into a variable in your script.
 '''
-
 import re
 words = 'Thomas Alva Edison (February 11, 1847 – October 18, 1931) was an American inventor and businessman, who has been described as America\'s greatest inventor. He developed many devices that greatly influenced life around the world, including the phonograph, the motion picture camera, and the long-lasting, practical electric light bulb. Dubbed "The Wizard of Menlo Park", he was one of the first inventors to apply the principles of mass production and large-scale teamwork to the process of invention, and because of that, he is often credited with the creation of the first industrial research laboratory. Edison was a prolific inventor, holding 1,093 US patents in his name, as well as many patents in the United Kingdom, France, and Germany. More significant than the number of Edison\'s patents was the widespread impact of his inventions: electric light and power utilities, sound recording, and motion pictures all established major new industries worldwide. Edison\'s inventions contributed to mass communication and, in particular, telecommunications. These included a stock ticker, a mechanical vote recorder, a battery for an electric car, electrical power, recorded music and motion pictures. His advanced work in these fields was an outgrowth of his early career as a telegraph operator. Edison developed a system of electric-power generation and distribution to homes, businesses, and factories – a crucial development in the modern industrialized world. His first power station was on Pearl Street in Manhattan, New York.'
 print('text:', words)
-print() # blank line for readability
+print()  # blank line for readability
 
 # Gerunds
-gerunds_re = r'(\w{2,}ing)' #Another option is (?:The|the|a|an|A|An)\s(\w{2,}ing)
+gerunds_re = r'(\w{2,}ing)'  # Another option is (?:The|the|a|an|A|An)\s(\w{2,}ing)
 print('regex for gerunds:', gerunds_re)
-result_gerund = re.findall(gerunds_re, words, re.I) # Using re.I to ignorecase
+result_gerund = re.findall(gerunds_re, words, re.I)  # Using re.I to ignorecase
 print('re.findall():', result_gerund)
 print('Number of gerunds:', len(result_gerund))
 print()
@@ -59,7 +58,7 @@ print('Number of other nominalized verbs formed with suffixes:', len(result_othe
 print()
 
 # Zero-change nominalization
-zero_re = r'\b((M|m)urder|(U|u)se|(C|c)hange)\b' #Just using the three examples we are provided
+zero_re = r'\b((M|m)urder|(U|u)se|(C|c)hange)\b'  # Just using the three examples we are provided
 print('regex for zero-change:', zero_re)
 result_zero = re.findall(zero_re, words, re.I)
 print('re.findall():', result_zero)
@@ -68,5 +67,4 @@ print()
 
 # Conclusion
 total = result_gerund + result_agent + result_recipient + result_other + result_zero
-print('Total number of nominalizations:',len(total))
-
+print('Total number of nominalizations:', len(total))
