@@ -27,8 +27,8 @@ print('text:', words)
 print() # blank line for readability
 
 # Gerunds
-gerunds_re = r'(?:The|the|a|an|A|An)\s(\w{2,}ing)'
-print('gerunds regex:', gerunds_re)
+gerunds_re = r'(\w{2,}ing)' #Another option is (?:The|the|a|an|A|An)\s(\w{2,}ing)
+print('regex for gerunds:', gerunds_re)
 result_gerund = re.findall(gerunds_re, words, re.I) # Using re.I to ignorecase
 print('re.findall():', result_gerund)
 print('Number of gerunds:', len(result_gerund))
@@ -36,7 +36,7 @@ print()
 
 # Agent Nouns
 agent_re = r'(\w{2,}(?:or|er))\b'
-print('agent nouns regex:', agent_re)
+print('regex for agent nouns:', agent_re)
 result_agent = re.findall(agent_re, words, re.I)
 print('re.findall():', result_agent)
 print('Number of agent nouns:', len(result_agent))
@@ -44,17 +44,24 @@ print()
 
 # Recipient Nouns
 recipient_re = r'\w{3,}ee\b'
-print('recipient nouns regex:', recipient_re)
+print('regex for recipient nouns:', recipient_re)
 result_recipient = re.findall(recipient_re, words, re.I)
 print('re.findall():', result_recipient)
 print('Number of recipient nouns:', len(result_recipient))
 print()
 
 # Other Nominalized verbs formed with suffixes
+other_re = r'(\w{2,}(?:tion|sion|ment|ence|ance)s?)\b'
+print('regex other nominalized verbs formed with suffixes:', other_re)
+result_other = re.findall(other_re, words, re.I)
+print('re.findall():', result_other)
+print('Number of other nominalized verbs formed with suffixes:', len(result_other))
+print()
 
 # Zero-change nominalization
+zero = 
 
 print()
 # Conclusion
-print('Total number of nominalizations:',len(result_gerund)+len(result_agent))
+print('Total number of nominalizations:',len(result_gerund) + len(result_agent) + len(result_recipient) + len(result_other))
 
