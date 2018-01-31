@@ -18,7 +18,7 @@ import re
 redlands = open('redlands+high+school.html', 'r') #I'm currently calling a single file. I need to somehow iterate over the files I've scraped.
 
 # Find mascots
-mascots_re = r'' #regex query
+mascots_re = r'Nickname</a></th>\n<td>(.*?)</td>' #regex query
 print('regex for mascots:', mascots_re) #display in console the regex
 result_mascot = re.findall(mascots_re, redlands, re.I) #run query with findall
 with open('redlands_parsed.txt', 'w') as my_file:
@@ -26,6 +26,7 @@ with open('redlands_parsed.txt', 'w') as my_file:
 print('re.findall():', result_mascot) # print results to console
 print()
 
+"""
 #Find population 
 population_re = r''
 print('regex for population:', population_re)
@@ -34,3 +35,4 @@ with open('redla)nds_parsed.txt', 'a') as my_file2:
     print('School population:' + result_population, file = my_file2)
 print('re.findall():', result_population)
 print()
+"""
