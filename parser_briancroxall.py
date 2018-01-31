@@ -28,7 +28,7 @@ print()
 
 """
 #Find population 
-population_re = r''
+population_re = r'Enrollment</th>\n<td>(.*?)<'
 print('regex for population:', population_re)
 result_population = re.findall(population_re, redlands, re.I)
 with open('redla)nds_parsed.txt', 'a') as my_file2:
