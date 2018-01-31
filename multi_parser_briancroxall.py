@@ -49,5 +49,5 @@ for filename in glob('*.html'):
     print()
 
 # Show name of outputted file
-    print('File saved as', filename)
+    print('File saved as', filename + '.txt')
     print()
