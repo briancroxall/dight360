@@ -10,7 +10,7 @@ Created on Tue Jan 30 18:28:10 2018
 @author: briancroxall
 
 Code to open file, parse with RegEx to find mascot name and school population
-size, and output to new file.
+size, and output to new file. Works on a single, named file.
 """
 import re #regular expressions
 
@@ -44,10 +44,3 @@ with open('redlands_parsed.txt', 'a') as my_file2:
     print('School population:', result_population, file = my_file2)
 print('re.findall():', result_population)
 print()
-
-
-"""
-from glob import glob
-
-for filename in glob('*.py'):
-    print(filename)
