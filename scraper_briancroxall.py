@@ -21,8 +21,3 @@ for term in ['redlands+high+school', 'redlands+east+valley+high+school', 'citrus
     time.sleep(random.uniform(1.5, 2.5)) # give the server some rest
     with open(term + '.html', 'w') as my_file: # open file in write mode, using name of query
         print(response.text, file = my_file) # write contents of page to file opened in previous line
-
-
-
-
-
