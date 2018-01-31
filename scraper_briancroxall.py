@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Mon Jan 29 15:08:47 2018
-
-@author: briancroxall
+Assignment: Choose any website(s) that you would like to scrape 
+and write a script to get the html and save it to a file (<filename>.html).
 
 Code to scrape Wikipedia and save output to files.
 
+Created on Mon Jan 29 15:08:47 2018
+
+@author: briancroxall
 """
 import random 
 import requests as r
