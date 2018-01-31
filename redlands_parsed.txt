@@ -1,2 +1,0 @@
-Mascot:  ['Terriers']
-School population: ['2,342']

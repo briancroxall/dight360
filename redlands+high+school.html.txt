@@ -1,0 +1,3 @@
+Mascot:  ['Terriers']
+School population: 2,342
+Coordinates: 34.05556; -117.17250
