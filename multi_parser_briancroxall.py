@@ -48,6 +48,9 @@ with open(filename + '.txt', 'a') as my_file3:
 print('re.findall():', result_geo)
 print()
 
+#Show name of outputted file
+print('File saved as', filename)
+
 """
 from glob import glob
 
