@@ -50,4 +50,4 @@ for filename in glob('*.html'):
 
 # Show name of outputted file
     print('File saved as', filename + '.txt')
-    print('***********')
+    print('***********')  # separator for clarity
