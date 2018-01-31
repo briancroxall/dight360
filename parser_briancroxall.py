@@ -16,10 +16,18 @@ import re
 
 # open file. 
 redlands = open('redlands+high+school.html', 'r') #I'm currently calling a single file. I need to somehow iterate over the files I've scraped.
+"""
+print(redlands) # this just seems to print the file name, or rather the TextIOWrapper and mode. So that leads me to think that this isn't what I want.
+"""
+
+"""
+for line in redlands:
+    print(line) # This prints the whole file to the console. 
+"""
 
 # Find mascots
 mascots_re = r'Nickname</a></th>\n<td>(.*?)</td>' #regex query
-print('regex for mascots:', mascots_re) #display in console the regex
+print('regex for mascots:', mascots_re) #display the regex string in the console #noqa: E501
 result_mascot = re.findall(mascots_re, redlands, re.I) #run query with findall
 with open('redlands_parsed.txt', 'w') as my_file:
     print('Mascot: ' + result_mascot, file = my_file) #save results to new file
@@ -31,7 +39,7 @@ print()
 population_re = r'Enrollment</th>\n<td>(.*?)<'
 print('regex for population:', population_re)
 result_population = re.findall(population_re, redlands, re.I)
-with open('redla)nds_parsed.txt', 'a') as my_file2:
+with open('redlands_parsed.txt', 'a') as my_file2:
     print('School population:' + result_population, file = my_file2)
 print('re.findall():', result_population)
 print()
