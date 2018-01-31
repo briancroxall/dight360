@@ -22,7 +22,7 @@ for filename in glob('*.html'):
         text = my_file.read()
 
 # Find mascots
-    mascots_re = r'Nickname</a></th>\n<td>(.*?)</td>' #regex query
+    mascots_re = r'Nickname</a></th>\n<td>(.*?)</td>|Mascot</th>\n.*>(.*?)</a>|Mascot</th>\n<td>(.*?)</' #regex query
     print('regex for mascots:', mascots_re) #display the regex string in the console #noqa: E501
     result_mascot = re.findall(mascots_re, text, re.I) #run query with findall
     with open(filename + '.txt', 'w') as my_file1:
@@ -49,4 +49,5 @@ for filename in glob('*.html'):
     print()
 
 #Show name of outputted file
-print('File saved as', filename)
+    print('File saved as', filename)
+    print()

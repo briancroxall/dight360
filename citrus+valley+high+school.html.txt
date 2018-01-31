@@ -1,0 +1,3 @@
+Mascot:  [('', '', 'Blackhawk')]
+School population: ['2,269 (2014-15)']
+Coordinates: 34.0823; -117.1934
