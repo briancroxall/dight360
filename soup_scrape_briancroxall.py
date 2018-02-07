@@ -27,20 +27,6 @@ from bs4 import BeautifulSoup
 import random
 import requests as r
 import time
-
-"""
-# Parse one file
-sites = []
-with open('scrape/aa.html') as aa_file:
-    soup = BeautifulSoup(aa_file, 'html.parser')
-for link in soup.find_all('a'):
-    print('link type', type(link))
-    
-    url = link.get('href')
-    end = url.split('/')[-1]
-    sites.append(end)
-print(sites)
-"""
  
 def get_rnlp(seed):
     """ This grabs a specified URL from Rob's site and saves it to a folder"""
@@ -58,18 +44,19 @@ def get_hrefs(filename):
     with open('scrape/' + filename) as html_file:  # opens the file passed to it
         soup = BeautifulSoup(html_file, 'html.parser')  # noqa: E501 creates variable soup that has the read content of the file via BS
     for link in soup.find_all('a'):  # finds all the a elements on the page
-        print('link type', type(link))  # prints the type of all the a elements
+        # print('link type', type(link))  # prints the type of all the a elements
         url = link.get('href')  # gets the value for all the href keys
         end = url.split('/')[-1]  # splits the value (a url) on its last slash
         sites.append(end)  # adds the end of the url to the empty list
     print(sites)  # prints the list to verify things worked correcrtly
 
-"""    
-    
-    list comprehensions
-sent1 = 'This is an example sentence.'.split()
-[word for word in sent1 if 'a' in word]
+site_list = ['aa.html']
+for item in site_list:
+    get_rnlp(item)
+    get_hrefs(item)
 
     
-for
-""" 
+    
+# list comprehensions
+sent1 = 'This is an example sentence.'.split()
+[word for word in sent1 if 'a' in word]
