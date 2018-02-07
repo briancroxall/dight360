@@ -48,15 +48,29 @@ print('Success!')
 print()  
     
 # Parse one file
+sites = []
 with open('scrape/aa.html') as aa_file:
     soup = BeautifulSoup(aa_file, 'html.parser')
-print(soup.prettify())
-"""
-def get_rnlp    
+for link in soup.find_all('a'):
+    print('link type', type(link))
     
-def get_hrefs:
+    url = link.get('href')
+    end = url.split('/')[-1]
+    sites.append(end)
+print(sites)
+
+# print(soup.find_all(re.compile(r'([a-z][a-z].html)')))
+ 
+"""
+    sites.append(link.get('href'))
+print(sites)
+"""
+
     
 
+"""    
+def get_rnlp:
+def get_hrefs:
     
     list comprehensions
 sent1 = 'This is an example sentence.'.split()
