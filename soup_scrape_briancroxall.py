@@ -61,11 +61,11 @@ def get_rnlp(seed):
     reynolds = 'http://reynoldsnlp.com/scrape/'  # stem for site
     response = r.get(reynolds + seed, headers=headers1)  
     time.sleep(random.uniform(1.5, 2.5))  # don't kill the server
-    with open('scrape/' + seed + '.html', 'w') as my_file:
-        print(response.text, file=my_file)
-        print('Success!')
+    with open('scrape/' + seed, 'w') as my_file:  # open file
+        print(response.text, file=my_file)  # write content of response to file
+        print('Successfully scraped ' + seed)  # noqa: E501; prints a message so we know it worked
     
-def get_hrefs():
+def get_hrefs(filename):
     sites = []
     with open('scrape/aa.html') as aa_file:
         soup = BeautifulSoup(aa_file, 'html.parser')
