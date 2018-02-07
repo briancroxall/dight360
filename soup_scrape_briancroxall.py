@@ -28,6 +28,7 @@ import random
 import requests as r
 import time
 
+
 def get_rnlp(seed):
 
     """ This grabs a specified URL from Rob's site and saves it to a folder"""
@@ -39,6 +40,7 @@ def get_rnlp(seed):
         print(response.text, file=my_file)  # write content of response to file
         print('Successfully scraped ' + seed)  # noqa: E501; prints a message so we know it worked
     print()  # blank line
+
 
 def get_hrefs(filename):
 
@@ -55,12 +57,12 @@ def get_hrefs(filename):
 
 site_list = ['aa.html']  # to-do list
 done_list = []  # things that have been scrape already
-while len(site_list) > 0:
-    item = site_list.pop()
-    if item in done_list:
-        continue
-    else:
+while len(site_list) > 0:  # if to-do list isn't empty
+    item = site_list.pop()  # pop the last item off the to-do list
+    if item in done_list:  # check done list to see if the item is already there
+        continue  # if it's in the done list, don't do anything BUT keep running the loop
+    else:  # if it's NOT in the done list
         get_rnlp(item)  # runs first function on seed item
         sites = get_hrefs(item)  # runs second function on seed item
         site_list.extend(sites)  # noqa: E501 adds the list from the second function to the initial seed list
-        done_list.append(item)
+        done_list.append(item)  # add the item to the done list
