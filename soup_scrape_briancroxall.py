@@ -24,7 +24,6 @@ same thing with all of those hrefs. Begin with 'aa.html'.
 
 """
 from bs4 import BeautifulSoup
-import re
 import random
 import requests as r
 import time
@@ -60,9 +59,9 @@ print(sites)
 def get_rnlp(seed):
     """ This grabs a specified URL from Rob's site and saves it to a folder"""
     reynolds = 'http://reynoldsnlp.com/scrape/'  # stem for site
-    response = r.get(reynolds + seed, headers=headers1)
-    time.sleep(random.uniform(1.5, 2.5))
-    with open('scrape/' + seed, 'w') as my_file:
+    response = r.get(reynolds + seed, headers=headers1)  
+    time.sleep(random.uniform(1.5, 2.5))  # don't kill the server
+    with open('scrape/' + seed + '.html', 'w') as my_file:
         print(response.text, file=my_file)
         print('Success!')
     
@@ -75,7 +74,7 @@ def get_hrefs():
         url = link.get('href')
         end = url.split('/')[-1]
         sites.append(end)
-print(sites)
+    print(sites)
 
 """    
     
