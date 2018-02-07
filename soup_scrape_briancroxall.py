@@ -37,6 +37,7 @@ def get_rnlp(seed):
     with open('scrape/' + seed, 'w') as my_file:  # open file
         print(response.text, file=my_file)  # write content of response to file
         print('Successfully scraped ' + seed)  # noqa: E501; prints a message so we know it worked
+    print()  # blank line
     
 def get_hrefs(filename):
     """ Opens the file passed to it and parses for the other links on the page """  #noqa: E501
@@ -48,15 +49,16 @@ def get_hrefs(filename):
         url = link.get('href')  # gets the value for all the href keys
         end = url.split('/')[-1]  # splits the value (a url) on its last slash
         sites.append(end)  # adds the end of the url to the empty list
-    print(sites)  # prints the list to verify things worked correcrtly
+    return sites  # prints the list to verify things worked correcrtly
 
-site_list = ['aa.html']
-for item in site_list:
-    get_rnlp(item)
-    get_hrefs(item)
-
-    
-    
-# list comprehensions
-sent1 = 'This is an example sentence.'.split()
-[word for word in sent1 if 'a' in word]
+site_list = ['aa.html']  # to-do list
+done_list = []  # things that have been scrape already
+while len(site_list) > 0:
+    item = site_list.pop()
+    if item in done_list:
+        continue
+    else: 
+        get_rnlp(item)  # runs first function on seed item
+        sites = get_hrefs(item)  # runs second function on seed item
+        site_list.extend(sites)  # adds the list from the second function to the initial seed list
+        done_list.append(item)
