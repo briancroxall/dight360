@@ -59,16 +59,18 @@ print(genre)
 """
 
 def extract_genre(filename):
-    short_file = filename.split('/').pop()
-    prefix = short_file.split('+')
-    register = prefix[1]
-    return register
+    """ Function to extract genre from file name """
+    short_file = filename.split('/').pop()  # splits the file name on slashes and keeps the last part and saves it to the variable
+    prefix = short_file.split('+')  # splits the file on the pluses and saves the list to the variable
+    register = prefix[1]  # takes the 1th index of the list, which is what I needed, and saves it to the variable
+    return register  # returns the genre
 
 
 
-with open('output.tsv', 'w') as my_file:
-    for each in glob('Mini-CORE/*.txt'):
-        print(each, extract_genre(each), file=my_file)
+with open('output.tsv', 'w') as my_file: # opens file to start writing
+    print('filename', 'feat1', 'feat2', 'feat3', 'register', sep='\t', file=my_file)  # noqa: E501 prints the headers, separated by tabs
+    for each in glob('Mini-CORE/*.txt'):  # for loop to iterate over corpus
+        print(each, '', '', '', extract_genre(each), sep='\t', file=my_file)  # noqa: E501 write t
     
 
 
