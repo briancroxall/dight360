@@ -16,14 +16,18 @@ OP: Opinion blogs
 SP: Interview transcripts
 
 The filenames are long. You can ignore everything except the first two letter
-code (after the 1+). That will tell you the register. For example, 
+code (after the 1+). That will tell you the register. For example,
 1+IP+DS+IP-IP-IP-IP+DS-DS-DS-DS+NNNY+0583255.txt is an IP text.
+
+Each file has a header with human annotator ratings and other information.
+You should only include lines that begin with <h> or <p> in your analysis
+(but remove the <h> or the <p>).
     
-Select 3 linguistic features that you think will vary across register 
+- Select 3 linguistic features that you think will vary across register 
 categories.
-Identify those features (make sure to check accuracy)
-Calculate normed rates of occurrence (per 1,000 words)
-Print them to a tab-separated file along with a column for 'Register' which
+- Identify those features (make sure to check accuracy)
+- Calculate normed rates of occurrence (per 1,000 words)
+- Print them to a tab-separated file along with a column for 'Register' which
 should contain a single two letter code for the register category (i.e. 
 extract the two letter register code from the filename). Your output should 
 be 1601 lines long and should look something like:
@@ -94,7 +98,7 @@ def extract_genre(filename):
     return register  # returns the genre
 
 with open('output.tsv', 'w') as my_file: # opens file to start writing
-    print('filename', 'pronouns', 'feat2', 'feat3', 'register', sep='\t', file=my_file)  # noqa: E501 prints the headers, separated by tabs
+    print('filename', 'singular first-person pronouns', 'Interrogative or Exclamation', 'feat3', 'register', sep='\t', file=my_file)  # noqa: E501 prints the headers, separated by tabs
     for each in glob('Mini-CORE/*.txt'):   # for loop to iterate over corpus
        with open(each, 'r') as read_file:  # read each file in the for-loop to prevent doing it multiple times in each different feature function
            text = read_file.read().lower()  # opens the file, reads the file, and lowercases the file and saves it to the variable
