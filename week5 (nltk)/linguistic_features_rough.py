@@ -55,6 +55,42 @@ import nltk
 from nltk.probability import FreqDist
 from glob import glob
 import re
+from string import punctuation as p
+
+# test file block
+"""
+with open('Mini-CORE/1+IN+EN+IN-IN-IN-IN+EN-EN-EN-EN+WIKI+9992596.txt', 'r') as my_file:  # noqa: E501
+    text = my_file.read().lower()
+    tokens_fd = FreqDist(nltk.word_tokenize(text))
+    s = tokens_fd['\'s']
+    ll = tokens_fd['\'ll']
+    t = tokens_fd['\'t']
+    d = tokens_fd['\'d']
+    ve = tokens_fd['\'ve']
+    er = tokens_fd['\'er']
+    m = tokens_fd['\'m']
+    are = tokens_fd['\'re']
+    yall = tokens_fd['\'all']
+    print(t, ll, t, d, ve, er, m, are, yall)
+    total_contract = t + ll + t + d + ve + er + m + are + yall
+    print(total_contract)
+    normed_contract = total_contract / len(tokens_fd)
+    print(len(tokens_fd))
+    print(normed_contract)
+    
+    """
+"""
+    contract = re.search('[' + p + ']'), my_file))
+    print(contract)
+
+    contraction_r1 = r'("\'[a-z]+?")'
+    contraction_r2 = r'(''[a-z]+?\')'
+    contract1 = re.findall(contraction_r1, my_file)
+    contract2 = re.findall(contraction_r2, my_file)
+    print('contract 1": ', contract1)
+    print('contract 2": ', contract2)
+    """
+
 
 def clean(words):
     # Function to clean out the metadata, tags, and headers
@@ -82,8 +118,7 @@ def punct(words):
     return normed_punct
 
 def count_contract(words):
-    # Function to extract contractions, as well as possessives
-    s = tokens_fd['\'s']  # Gets the number of each of these tokens
+    s = tokens_fd['\'s']
     ll = tokens_fd['\'ll']
     t = tokens_fd['\'t']
     d = tokens_fd['\'d']
@@ -92,7 +127,7 @@ def count_contract(words):
     m = tokens_fd['\'m']
     are = tokens_fd['\'re']
     yall = tokens_fd['\'all']
-    total_contract = s + ll + t + d + ve + er + m + are + yall
+    total_contract = t + ll + t + d + ve + er + m + are + yall
     normed_contract = total_contract / len(words)
     return normed_contract
 
@@ -112,3 +147,14 @@ with open('output.tsv', 'w') as my_file: # opens file to start writing
            tokens = nltk.word_tokenize(cleaned_text)  # noqa: E501 tokenizes the file that had been saved to the variable
            tokens_fd = FreqDist(tokens)  # noqa: E501 takes the frequency distribution of the tokens
        print(each, pronouns(tokens_fd), punct(tokens_fd), count_contract(tokens_fd), extract_genre(each), sep='\t', file=my_file)  # noqa: E501 write the results of each text moving through each function to the outpt file
+    
+"""
+
+
+re.search('[' + p + ']'), 'This is a test.').group(0))
+   
+      
+print('Text', 'TTR', 'artTR', 'smoteTR', sep='\t')
+for t in [text1, text2, text3, text4]:
+    print(t.name, ttr(t), artTR(t), smoteTR(t), sep='\t')
+"""
