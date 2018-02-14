@@ -106,7 +106,7 @@ with open('output.tsv', 'w') as my_file: # opens file to start writing
     for each in glob('Mini-CORE/*.txt'):   # for loop to iterate over corpus
        with open(each, 'r') as read_file:  # read each file in the for-loop to prevent doing it multiple times in each different feature function
            text = read_file.read().lower()  # opens the file, reads the file, and lowercases the file and saves it to the variable
-           cleaned_text = clean(text)
+           cleaned_text = clean(text)  # process text through clean function
            tokens = nltk.word_tokenize(cleaned_text)  # tokenizes the file that had been saved to the variable
            tokens_fd = FreqDist(tokens)  # takes the frequency distribution of the tokens
        print(each, pronouns(tokens_fd), punct(tokens_fd), '', extract_genre(each), sep='\t', file=my_file)  # noqa: E501 write the results of each text moving through each function to the outpt file
