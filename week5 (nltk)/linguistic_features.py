@@ -54,17 +54,16 @@ Created on Mon Feb 12 15:27:45 2018
 import nltk
 from nltk.probability import FreqDist
 from glob import glob
+import re
+from string import punctuation as p
 
 """
 # test file block
 with open('Mini-CORE/1+IN+EN+IN-IN-IN-IN+EN-EN-EN-EN+WIKI+9992596.txt', 'r') as my_file:
-    text = my_file.read()
-    tokens = nltk.word_tokenize(text)
-    tokens_fd = FreqDist(tokens)
-    print('Frequency of \'I\': ', tokens_fd['I'])
-    pro_I = tokens_fd['I']
-    normed_rate_pro_I = pro_I / 1000
-    print('Normed rate of \'I\': ', normed_rate_pro_I)
+    text = my_file.read().lower()
+    clean_re = r'<p>(.*)'
+    clean_text = re.findall(clean_re, text)
+    print(clean_text)
 
     
 """
@@ -101,14 +100,16 @@ with open('output.tsv', 'w') as my_file: # opens file to start writing
     print('filename', 'singular first-person pronouns', 'Interrogative or Exclamation', 'feat3', 'register', sep='\t', file=my_file)  # noqa: E501 prints the headers, separated by tabs
     for each in glob('Mini-CORE/*.txt'):   # for loop to iterate over corpus
        with open(each, 'r') as read_file:  # read each file in the for-loop to prevent doing it multiple times in each different feature function
+           #clean(read_file)
            text = read_file.read().lower()  # opens the file, reads the file, and lowercases the file and saves it to the variable
            tokens = nltk.word_tokenize(text)  # tokenizes the file that had been saved to the variable
            tokens_fd = FreqDist(tokens)  # takes the frequency distribution of the tokens
        print(each, pronouns(tokens_fd), punct(tokens_fd), '', extract_genre(each), sep='\t', file=my_file)  # noqa: E501 write the results of each text moving through each function to the outpt file
     
 
-"""
 
+
+"""
 re.search('[' + p + ']'), 'This is a test.').group(0))
    
       
