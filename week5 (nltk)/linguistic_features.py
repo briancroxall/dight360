@@ -59,7 +59,7 @@ from string import punctuation as p
 
 """
 # test file block
-with open('Mini-CORE/1+IN+EN+IN-IN-IN-IN+EN-EN-EN-EN+WIKI+9992596.txt', 'r') as my_file:
+with open('Mini-CORE/1+IN+EN+IN-IN-IN-IN+EN-EN-EN-EN+WIKI+9992596.txt', 'r') as my_file:  # noqa: E501
     text = my_file.read().lower()
     clean_re = r'<p>(.*)'
     clean_text = re.findall(clean_re, text)
@@ -71,19 +71,19 @@ with open('Mini-CORE/1+IN+EN+IN-IN-IN-IN+EN-EN-EN-EN+WIKI+9992596.txt', 'r') as 
 
 def clean(words):
     # Function to clean out the metadata, tags, and headers
-    clean_re = r'<p>(.*)'  # regex to find text within <p> tags only. Didn't take header text
-    clean_text = re.findall(clean_re, words)  # use findall to get text and assign it
-    join_clean = ' '.join(clean_text)  # what findall returns is a list of strings, so those strings need to be joined again
+    clean_re = r'<p>(.*)'  # noqa: E501 regex to find text within <p> tags only. Didn't take header text
+    clean_text = re.findall(clean_re, words)  # noqa: E501 use findall to get text and assign it
+    join_clean = ' '.join(clean_text)  # noqa: E501 what findall returns is a list of strings, so those strings need to be joined again
     return join_clean
 
 def pronouns(words):
     # Function to extract first-person, singular pronouns from corpus 
-    pro_I = tokens_fd['i']  # returns the int value for the key 'i' (AKA the number of times i appears as a single token)
+    pro_I = tokens_fd['i']  # noqa: E501 returns the int value for the key 'i' (AKA the number of times i appears as a single token)
     pro_me = tokens_fd['me']
     pro_my = tokens_fd['my']
     pro_mine = tokens_fd['mine']
-    total_pronouns = pro_I + pro_me + pro_my + pro_mine  # adds the totals of each pronoun together
-    normed_first = total_pronouns / len(words)  # divides the total pronouns by the total number of tokens
+    total_pronouns = pro_I + pro_me + pro_my + pro_mine  # noqa: E501 adds the totals of each pronoun together
+    normed_first = total_pronouns / len(words)  # noqa: E501 divides the total pronouns by the total number of tokens
     return normed_first  # returns that total 
 
 def punct(words):
@@ -96,19 +96,19 @@ def punct(words):
 
 def extract_genre(filename):
     # Function to extract genre from file name 
-    short_file = filename.split('/').pop()  # splits the file name on slashes and keeps the last part and saves it to the variable
-    prefix = short_file.split('+')  # splits the file on the pluses and saves the list to the variable
-    register = prefix[1]  # takes the 1th index of the list, which is what I needed, and saves it to the variable
+    short_file = filename.split('/').pop()  # noqa: E501 splits the file name on slashes and keeps the last part and saves it to the variable
+    prefix = short_file.split('+')  # noqa: E501 splits the file on the pluses and saves the list to the variable
+    register = prefix[1]  # noqa: E501 takes the 1th index of the list, which is what I needed, and saves it to the variable
     return register  # returns the genre
 
 with open('output.tsv', 'w') as my_file: # opens file to start writing
-    print('filename', 'singular first-person pronouns', 'Interrogative or Exclamation', 'feat3', 'register', sep='\t', file=my_file)  # noqa: E501 prints the headers, separated by tabs
+    print('filename', 'singular first-person pronouns', 'Interrogative or Exclamation', 'Contractions', 'register', sep='\t', file=my_file)  # noqa: E501 prints the headers, separated by tabs
     for each in glob('Mini-CORE/*.txt'):   # for loop to iterate over corpus
-       with open(each, 'r') as read_file:  # read each file in the for-loop to prevent doing it multiple times in each different feature function
-           text = read_file.read().lower()  # opens the file, reads the file, and lowercases the file and saves it to the variable
+       with open(each, 'r') as read_file:  # noqa: E501 read each file in the for-loop to prevent doing it multiple times in each different feature function
+           text = read_file.read().lower()  # noqa: E501 opens the file, reads the file, and lowercases the file and saves it to the variable
            cleaned_text = clean(text)  # process text through clean function
-           tokens = nltk.word_tokenize(cleaned_text)  # tokenizes the file that had been saved to the variable
-           tokens_fd = FreqDist(tokens)  # takes the frequency distribution of the tokens
+           tokens = nltk.word_tokenize(cleaned_text)  # noqa: E501 tokenizes the file that had been saved to the variable
+           tokens_fd = FreqDist(tokens)  # noqa: E501 takes the frequency distribution of the tokens
        print(each, pronouns(tokens_fd), punct(tokens_fd), '', extract_genre(each), sep='\t', file=my_file)  # noqa: E501 write the results of each text moving through each function to the outpt file
     
 
