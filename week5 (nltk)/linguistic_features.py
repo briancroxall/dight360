@@ -67,9 +67,14 @@ with open('Mini-CORE/1+IN+EN+IN-IN-IN-IN+EN-EN-EN-EN+WIKI+9992596.txt', 'r') as 
 
     
 """
-# def clean(text):
-    # Function to clean out the metadata, tags, and headers
 
+
+def clean(words):
+    # Function to clean out the metadata, tags, and headers
+    clean_re = r'<p>(.*)'  # regex to find text within <p> tags only. Didn't take header text
+    clean_text = re.findall(clean_re, words)  # use findall to get text and assign it
+    join_clean = ' '.join(clean_text)  # what findall returns is a list of strings, so those strings need to be joined again
+    return join_clean
 
 def pronouns(words):
     # Function to extract first-person, singular pronouns from corpus 
@@ -100,9 +105,9 @@ with open('output.tsv', 'w') as my_file: # opens file to start writing
     print('filename', 'singular first-person pronouns', 'Interrogative or Exclamation', 'feat3', 'register', sep='\t', file=my_file)  # noqa: E501 prints the headers, separated by tabs
     for each in glob('Mini-CORE/*.txt'):   # for loop to iterate over corpus
        with open(each, 'r') as read_file:  # read each file in the for-loop to prevent doing it multiple times in each different feature function
-           #clean(read_file)
            text = read_file.read().lower()  # opens the file, reads the file, and lowercases the file and saves it to the variable
-           tokens = nltk.word_tokenize(text)  # tokenizes the file that had been saved to the variable
+           cleaned_text = clean(text)
+           tokens = nltk.word_tokenize(cleaned_text)  # tokenizes the file that had been saved to the variable
            tokens_fd = FreqDist(tokens)  # takes the frequency distribution of the tokens
        print(each, pronouns(tokens_fd), punct(tokens_fd), '', extract_genre(each), sep='\t', file=my_file)  # noqa: E501 write the results of each text moving through each function to the outpt file
     
