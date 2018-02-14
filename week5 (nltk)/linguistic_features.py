@@ -28,9 +28,9 @@ should contain a single two letter code for the register category (i.e.
 extract the two letter register code from the filename). Your output should 
 be 1601 lines long and should look something like:
     
-filename	<feat1>	<feat2>	<feat3>	register
-1+IN+....txt	15.2	131.3	22.4	IN
-1+HI+....txt	14.6	119.6	26.9	HI
+filename    <feat1>    <feat2>    <feat3>    register
+1+IN+....txt    15.2    131.3    22.4    IN
+1+HI+....txt    14.6    119.6    26.9    HI
 Change <feat1>, <feat2>, and <feat3> to actual labels of your selected 
 features. Here are some features you can consider counting:
 
@@ -48,43 +48,66 @@ Created on Mon Feb 12 15:27:45 2018
 """
 
 import nltk
+from nltk.probability import FreqDist
 from glob import glob
 
 """
-file = 'Mini-CORE/1+IN+EN+IN-IN-IN-IN+EN-EN-EN-EN+WIKI+9992596.txt'
-short_file = file.split('/').pop()
-prefix = short_file.split('+')
-genre = prefix[1]
-print(genre)
+# test file block
+with open('Mini-CORE/1+IN+EN+IN-IN-IN-IN+EN-EN-EN-EN+WIKI+9992596.txt', 'r') as my_file:
+    text = my_file.read()
+    tokens = nltk.word_tokenize(text)
+    tokens_fd = FreqDist(tokens)
+    print('Frequency of \'I\': ', tokens_fd['I'])
+    pro_I = tokens_fd['I']
+    normed_rate_pro_I = pro_I / 1000
+    print('Normed rate of \'I\': ', normed_rate_pro_I)
+
+    
 """
+# def clean(text):
+    # Function to clean out the metadata, tags, and headers
+
+
+def pronouns(words):
+    # Function to extract first-person, singular pronouns from corpus 
+    pro_I = tokens_fd['i']  # returns the int value for the key 'i' (AKA the number of times i appears as a single token)
+    pro_me = tokens_fd['me']
+    pro_my = tokens_fd['my']
+    pro_mine = tokens_fd['mine']
+    total_pronouns = pro_I + pro_me + pro_my + pro_mine  # adds the totals of each pronoun together
+    normed_first = total_pronouns / len(words)  # divides the total pronouns by the total number of tokens
+    return normed_first  # returns that total 
+
+def punct(words):
+    # Function to extract ! and ? from corpus
+    punctq = tokens_fd['?']
+    puncte = tokens_fd['!']
+    total_excite = punctq + puncte
+    normed_punct = total_excite / len(words)
+    return normed_punct
 
 def extract_genre(filename):
-    """ Function to extract genre from file name """
+    # Function to extract genre from file name 
     short_file = filename.split('/').pop()  # splits the file name on slashes and keeps the last part and saves it to the variable
     prefix = short_file.split('+')  # splits the file on the pluses and saves the list to the variable
     register = prefix[1]  # takes the 1th index of the list, which is what I needed, and saves it to the variable
     return register  # returns the genre
 
-
-
 with open('output.tsv', 'w') as my_file: # opens file to start writing
-    print('filename', 'feat1', 'feat2', 'feat3', 'register', sep='\t', file=my_file)  # noqa: E501 prints the headers, separated by tabs
-    for each in glob('Mini-CORE/*.txt'):  # for loop to iterate over corpus
-        print(each, '', '', '', extract_genre(each), sep='\t', file=my_file)  # noqa: E501 write t
+    print('filename', 'pronouns', 'feat2', 'feat3', 'register', sep='\t', file=my_file)  # noqa: E501 prints the headers, separated by tabs
+    for each in glob('Mini-CORE/*.txt'):   # for loop to iterate over corpus
+       with open(each, 'r') as read_file:  # read each file in the for-loop to prevent doing it multiple times in each different feature function
+           text = read_file.read().lower()  # opens the file, reads the file, and lowercases the file and saves it to the variable
+           tokens = nltk.word_tokenize(text)  # tokenizes the file that had been saved to the variable
+           tokens_fd = FreqDist(tokens)  # takes the frequency distribution of the tokens
+       print(each, pronouns(tokens_fd), punct(tokens_fd), '', extract_genre(each), sep='\t', file=my_file)  # noqa: E501 write the results of each text moving through each function to the outpt file
     
 
-
-
-
 """
-for filename in glob('Mini-CORE/*.txt'):
-    with open(filename, 'r') as f:
-        print
 
-
-"""     
-        
-"""       
+re.search('[' + p + ']'), 'This is a test.').group(0))
+   
+      
 print('Text', 'TTR', 'artTR', 'smoteTR', sep='\t')
 for t in [text1, text2, text3, text4]:
     print(t.name, ttr(t), artTR(t), smoteTR(t), sep='\t')
