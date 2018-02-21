@@ -109,3 +109,4 @@ with open('IN.txt', 'w') as my_file:
             tokens = nltk.word_tokenize(cleaned_text)
             tokens_fd = FreqDist(tokens)
             fd.update(tokens_fd)
+        print(fd.most_common(), file=my_file)
