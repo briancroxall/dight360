@@ -32,6 +32,7 @@ from string import punctuation as punct  # string of common punctuation chars
 
 import matplotlib.pyplot as plt
 import nltk
+from nltk.sentiment.vade import SentimentIntensityAnalyzer as sia
 import pandas
 from pandas.tools.plotting import scatter_matrix
 from sklearn import model_selection
@@ -134,6 +135,8 @@ def punct_quest(in_Text):
     quest_count = len([q for q in in_Text if re.match(r'(\?+)', q)])
     return quest_count / len(in_Text)
 
+
+
 # add feature names HERE
 feat_names = ['ttr', '1st-pro', '2nd-pro', '3rd-pro', 'punct', 'exclam', 'quest'
               'genre']
@@ -144,7 +147,8 @@ with open('mc_features.csv', 'w') as out_file:
     for f in glob.glob(MC_DIR + '*.txt'):
         print('.', end='', flush=True)  # show progress; print 1 dot per file
         with open(f) as the_file:
-            raw_text = clean(the_file)
+            lowered_text = the_file.read().lower()  #lowercase the text
+            raw_text = clean(lowered_text)
         tok_text = nltk.word_tokenize(raw_text)
         # call the function HERE
         print(ttr(tok_text), pro1_tr(tok_text), pro2_tr(tok_text),
