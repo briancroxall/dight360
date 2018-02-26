@@ -8,9 +8,11 @@ Created on Mon Feb 26 15:18:10 2018
 
 import nltk
 from nltk.probability import FreqDist
+from nltk.sentiment.vader import SentimentIntensityAnalyzer as sia
 from glob import glob
 import re
 from string import punctuation as p
+
 
 def clean(words):
     # Function to clean out the metadata, tags, and headers
@@ -22,8 +24,13 @@ def clean(words):
 with open('Mini-CORE/1+IN+EN+IN-IN-IN-IN+EN-EN-EN-EN+WIKI+9992596.txt', 'r') as my_file:  # noqa: E501
     text = my_file.read().lower()
     clean_text = clean(text)
+    sentences = nltk.sent_tokenize(clean_text)
     tokens = nltk.word_tokenize(clean_text)
     tokens_fd = FreqDist(tokens)
     print(tokens[0:5])
     print(tokens_fd)
-    
+    print(sentences[2])
+    for sentence in sentences:
+        ps = sia.polarity_scores(sentence)
+        for k in sorted(ps):
+            print('\t{}: {:> 1.4}'.format(k, ps[k]), end='  ')

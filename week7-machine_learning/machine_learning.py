@@ -32,7 +32,7 @@ from string import punctuation as punct  # string of common punctuation chars
 
 import matplotlib.pyplot as plt
 import nltk
-from nltk.sentiment.vade import SentimentIntensityAnalyzer as sia
+from nltk.sentiment.vader import SentimentIntensityAnalyzer as sia
 import pandas
 from pandas.tools.plotting import scatter_matrix
 from sklearn import model_selection
