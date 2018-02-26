@@ -48,7 +48,7 @@ from sklearn.svm import SVC
 from sklearn.tree import DecisionTreeClassifier
 
 # TODO change to the location of your Mini-CORE corpus
-MC_DIR = '/Users/robertreynolds/corpora/Mini-CORE/'
+MC_DIR = '/Mini-CORE/'
 
 
 def clean(in_file):
@@ -116,9 +116,27 @@ def punct_tr(in_Text):
     punct_count = len([i for i in in_Text if re.match('[' + punct + ']+$', i)])
     return punct_count / len(in_Text)
 
+def punct_ex(in_Text):
+    """
+    Compute exclamation-token ration for input Text.
+    
+    in_Text -- nltk.Text object or list of strings
+    """
+    ex_count = len([ex for ex in in_Text if re.match(r'(!+)', ex)])
+    return ex_count / len(in_Text)
+
+def punct_quest(in_Text):
+    """
+    Compute question mark-token ration for input Text.
+    
+    in_Text -- nltk.Text object or list of strings
+    """
+    quest_count = len([q for q in in_Text if re.match(r'(\?+)', q)])
+    return quest_count / len(in_Text)
 
 # add feature names HERE
-feat_names = ['ttr', '1st-pro', '2nd-pro', '3rd-pro', 'punct', 'genre']
+feat_names = ['ttr', '1st-pro', '2nd-pro', '3rd-pro', 'punct', 'exclam', 'quest'
+              'genre']
 with open('mc_feat_names.txt', 'w') as name_file:
     name_file.write('\t'.join(feat_names))
 
@@ -130,7 +148,8 @@ with open('mc_features.csv', 'w') as out_file:
         tok_text = nltk.word_tokenize(raw_text)
         # call the function HERE
         print(ttr(tok_text), pro1_tr(tok_text), pro2_tr(tok_text),
-              pro3_tr(tok_text), punct_tr(tok_text), subcorp(f),
+              pro3_tr(tok_text), punct_tr(tok_text), punct_ex(tok_text), 
+              punct_quest(tokk_text), subcorp(f),
               sep=',', file=out_file)
     print()  # newline after progress dots
 
@@ -143,6 +162,9 @@ with open('mc_features.csv', 'w') as out_file:
 # KEEPING `'genre'` AND `subcorp(f)` AS THE LAST ITEM!!
 
 ###############################################################################
+
+
+
 # Load dataset
 with open('mc_feat_names.txt') as name_file:
     names = name_file.read().strip().split('\t')
