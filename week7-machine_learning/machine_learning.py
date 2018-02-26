@@ -7,7 +7,22 @@ for you. All you need to do is design and implement features to be included in
 your model, as explained below. You may want to review your work on Assignment
 5 before you begin.
 
+For each new feature that you design...
 
+Step A: Write a new function to extract the feature (use `ttr` as an example).
+
+Step B: Add a label to feat_names
+
+Step C: Call the function in the `print` function that writes to out_file. 
+Make sure to keep the order the same between feat_names and the print 
+function, ALWAYS KEEPING `'genre'` AND `subcorp(f)` AS THE LAST ITEM!!
+
+Note that all the included functions take `tok_text` as their argument, but 
+you may want some of your features to be based on other textual properties, 
+like the output of `sent_tokenize()` or `pos_tag()` or something else.
+
+NB! Do not assume that the functions already included are ideal/reliable. Be 
+strategic about how you clean the data, how you handle punctuation, etc.
 
 """
 
