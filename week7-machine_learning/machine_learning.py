@@ -135,7 +135,13 @@ def punct_quest(in_Text):
     quest_count = len([q for q in in_Text if re.match(r'(\?+)', q)])
     return quest_count / len(in_Text)
 
-
+def sentiment(in_Text):
+    """
+    Computer sentiment analysis markes for input Text. 
+    
+    in_Text -- nltk.Text object or list of strings
+    """
+    
 
 # add feature names HERE
 feat_names = ['ttr', '1st-pro', '2nd-pro', '3rd-pro', 'punct', 'exclam', 'quest'
