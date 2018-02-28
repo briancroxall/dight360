@@ -33,10 +33,10 @@ with open('Mini-CORE/1+IN+EN+IN-IN-IN-IN+EN-EN-EN-EN+WIKI+9992596.txt', 'r') as 
    # print(tokens[0:5])
    # print(tokens_fd)
    # print(sentences[2])
-    sent_len = [] 
-    for sentence in sentences:
-        length = [len(sentence)]
-        sent_len.extend(length)
-    average_length = numpy.mean(sent_len)
+    word_len = [] 
+    for word in tokens:
+        length = [len(word)]
+        word_len.extend(length)
+    average_length = numpy.mean(word_len)
     print(average_length)
     
