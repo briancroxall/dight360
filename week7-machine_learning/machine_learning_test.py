@@ -21,16 +21,17 @@ def clean(words):
     join_clean = ' '.join(clean_text)  # noqa: E501 what findall returns is a list of strings, so those strings need to be joined again
     return join_clean
 
+hal = sia()
+
 with open('Mini-CORE/1+IN+EN+IN-IN-IN-IN+EN-EN-EN-EN+WIKI+9992596.txt', 'r') as my_file:  # noqa: E501
     text = my_file.read().lower()
     clean_text = clean(text)
     sentences = nltk.sent_tokenize(clean_text)
     tokens = nltk.word_tokenize(clean_text)
     tokens_fd = FreqDist(tokens)
-    print(tokens[0:5])
-    print(tokens_fd)
-    print(sentences[2])
+   # print(tokens[0:5])
+   # print(tokens_fd)
+   # print(sentences[2])
     for sentence in sentences:
-        ps = sia.polarity_scores(sentence)
-        for k in sorted(ps):
-            print('\t{}: {:> 1.4}'.format(k, ps[k]), end='  ')
+        ps = hal.polarity_scores(sentence)['compound']
+        print(ps)
