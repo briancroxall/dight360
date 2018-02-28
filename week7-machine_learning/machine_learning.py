@@ -13,15 +13,15 @@ Step A: Write a new function to extract the feature (use `ttr` as an example).
 
 Step B: Add a label to feat_names
 
-Step C: Call the function in the `print` function that writes to out_file. 
-Make sure to keep the order the same between feat_names and the print 
+Step C: Call the function in the `print` function that writes to out_file.
+Make sure to keep the order the same between feat_names and the print
 function, ALWAYS KEEPING `'genre'` AND `subcorp(f)` AS THE LAST ITEM!!
 
-Note that all the included functions take `tok_text` as their argument, but 
-you may want some of your features to be based on other textual properties, 
+Note that all the included functions take `tok_text` as their argument, but
+you may want some of your features to be based on other textual properties,
 like the output of `sent_tokenize()` or `pos_tag()` or something else.
 
-NB! Do not assume that the functions already included are ideal/reliable. Be 
+NB! Do not assume that the functions already included are ideal/reliable. Be
 strategic about how you clean the data, how you handle punctuation, etc.
 
 """
@@ -54,7 +54,7 @@ MC_DIR = 'Mini-CORE/'
 
 
 def clean(in_file):
-    #Remove headers from corpus file.
+    # Remove headers from corpus file.
     out_str = ''
     for line in in_file:
         if re.match(r'<[hp]>', line):
@@ -118,70 +118,76 @@ def punct_tr(in_Text):
     punct_count = len([i for i in in_Text if re.match('[' + punct + ']+$', i)])
     return punct_count / len(in_Text)
 
+
 def punct_ex(in_Text):
     """
     Compute exclamation-token ration for input Text.
-    
+
     in_Text -- nltk.Text object or list of strings
     """
     ex_count = len([ex for ex in in_Text if re.match(r'(!+)', ex)])
     return ex_count / len(in_Text)
 
+
 def punct_quest(in_Text):
     """
     Compute question mark-token ration for input Text.
-    
+
     in_Text -- nltk.Text object or list of strings
     """
     quest_count = len([q for q in in_Text if re.match(r'(\?+)', q)])
     return quest_count / len(in_Text)
 
+
 def sentiment(in_doc):
     """
-    Computer sentiment analysis markes for input Text. 
-    
-    in_doc -- cleaned text 
+    Computer sentiment analysis markes for input Text.
+
+    in_doc -- cleaned text
     """
     sent_ana = sia()
     ps = sent_ana.polarity_scores(in_doc)['compound']
     return ps
 
+
 def sent_length(sentences):
     """
     Measure the average sentence length in a particular file.
-    
+
     sentences -- nltk.Text object or list of strings
-    
+
     """
-    sent_len = [] 
+    sent_len = []
     for sentence in sentences:
         length = [len(sentence)]
         sent_len.extend(length)
     average_length = numpy.mean(sent_len)
     return average_length
 
+
 def word_length(in_Text):
     """
     Measure the average word length in a particular file.
-    
+
     in_Text -- nltk.Text object or list of strings
     """
-    word_len = [] 
+    word_len = []
     for word in in_Text:
         length = [len(word)]
         word_len.extend(length)
     average_length = numpy.mean(word_len)
     return average_length
 
-    
+
 """
-sentence length, word length, swear words
+swear words
 
 """
 
 # add feature names HERE
-feat_names = ['ttr', '1st-pro', '2nd-pro', '3rd-pro', 'punct', 'exclam', 
-              'quest', 'sentiment', 'avg sent length', 'avg word length', 'genre']
+feat_names = ['ttr', '1st-pro', '2nd-pro', '3rd-pro', 'punct', 'exclam',
+              'quest', 'sentiment', 'avg sent length', 'avg word length',
+              'genre']
 with open('mc_feat_names.txt', 'w') as name_file:
     name_file.write('\t'.join(feat_names))
 
@@ -190,13 +196,13 @@ with open('mc_features.csv', 'w') as out_file:
         print('.', end='', flush=True)  # show progress; print 1 dot per file
         with open(f) as the_file:
             text = clean(the_file)  # creates a cleaned version of text
-            lowered_text = text.lower()  # lowercase the cleaned text 
+            lowered_text = text.lower()  # lowercase the cleaned text
         sent_tok = nltk.sent_tokenize(text)
         tok_text = nltk.word_tokenize(lowered_text)
         # call the function HERE
         print(ttr(tok_text), pro1_tr(tok_text), pro2_tr(tok_text),
-              pro3_tr(tok_text), punct_tr(tok_text), punct_ex(tok_text), 
-              punct_quest(tok_text), sentiment(text), sent_length(sent_tok), 
+              pro3_tr(tok_text), punct_tr(tok_text), punct_ex(tok_text),
+              punct_quest(tok_text), sentiment(text), sent_length(sent_tok),
               word_length(tok_text), subcorp(f), sep=',', file=out_file)
     print()  # newline after progress dots
 
@@ -209,7 +215,6 @@ with open('mc_features.csv', 'w') as out_file:
 # KEEPING `'genre'` AND `subcorp(f)` AS THE LAST ITEM!!
 
 ###############################################################################
-
 
 
 # Load dataset
