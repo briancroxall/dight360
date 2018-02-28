@@ -12,6 +12,7 @@ from nltk.sentiment.vader import SentimentIntensityAnalyzer as sia
 from glob import glob
 import re
 from string import punctuation as p
+import numpy
 
 
 def clean(words):
@@ -32,6 +33,10 @@ with open('Mini-CORE/1+IN+EN+IN-IN-IN-IN+EN-EN-EN-EN+WIKI+9992596.txt', 'r') as 
    # print(tokens[0:5])
    # print(tokens_fd)
    # print(sentences[2])
+    sent_len = [] 
     for sentence in sentences:
-        ps = hal.polarity_scores(sentence)['compound']
-        print(ps)
+        length = [len(sentence)]
+        sent_len.extend(length)
+    average_length = numpy.mean(sent_len)
+    print(average_length)
+    
