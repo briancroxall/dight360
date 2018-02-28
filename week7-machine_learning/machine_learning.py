@@ -190,7 +190,7 @@ def swearing(in_Text):
 
 def donkey(in_Text):
     """
-    Measuer of swear words in input Text
+    Measure of swear words in input Text
     """
     regex = r'(ass(?:hole)?)'
     swear2_count = len([i for i in in_Text if re.match(regex, i, re.I)])
@@ -328,15 +328,15 @@ fig.savefig('compare_algorithms.png')
 print()
 
 # Make predictions on validation dataset
-# best_model = KNeighborsClassifier()
-# best_model.fit(feats_train, labels_train)
-# predictions = best_model.predict(feats_validation)
-# print('Accuracy:', accuracy_score(labels_validation, predictions))
-# print()
-# print('Confusion matrix:')
-# cm_labels = 'Iris-setosa Iris-versicolor Iris-virginica'.split()
-# print('labels:', cm_labels)
-# print(confusion_matrix(labels_validation, predictions, labels=cm_labels))
-# print()
-# print('Classification report:')
-# print(classification_report(labels_validation, predictions))
+best_model = GaussianNB()
+best_model.fit(feats_train, labels_train)
+predictions = best_model.predict(feats_validation)
+print('Accuracy:', accuracy_score(labels_validation, predictions))
+print()
+print('Confusion matrix:')
+cm_labels = 'Iris-setosa Iris-versicolor Iris-virginica'.split()
+print('labels:', cm_labels)
+print(confusion_matrix(labels_validation, predictions, labels=cm_labels))
+print()
+print('Classification report:')
+print(classification_report(labels_validation, predictions))
