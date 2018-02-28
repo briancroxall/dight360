@@ -159,6 +159,20 @@ def sent_length(sentences):
         sent_len.extend(length)
     average_length = numpy.mean(sent_len)
     return average_length
+
+def word_length(in_Text):
+    """
+    Measure the average word length in a particular file.
+    
+    in_Text -- nltk.Text object or list of strings
+    """
+    word_len = [] 
+    for word in in_Text:
+        length = [len(word)]
+        word_len.extend(length)
+    average_length = numpy.mean(word_len)
+    return average_length
+
     
 """
 sentence length, word length, swear words
@@ -167,7 +181,7 @@ sentence length, word length, swear words
 
 # add feature names HERE
 feat_names = ['ttr', '1st-pro', '2nd-pro', '3rd-pro', 'punct', 'exclam', 
-              'quest', 'sentiment', 'avg sent length', 'genre']
+              'quest', 'sentiment', 'avg sent length', 'avg word length', 'genre']
 with open('mc_feat_names.txt', 'w') as name_file:
     name_file.write('\t'.join(feat_names))
 
@@ -183,7 +197,7 @@ with open('mc_features.csv', 'w') as out_file:
         print(ttr(tok_text), pro1_tr(tok_text), pro2_tr(tok_text),
               pro3_tr(tok_text), punct_tr(tok_text), punct_ex(tok_text), 
               punct_quest(tok_text), sentiment(text), sent_length(sent_tok), 
-              subcorp(f), sep=',', file=out_file)
+              word_length(tok_text), subcorp(f), sep=',', file=out_file)
     print()  # newline after progress dots
 
 ###############################################################################
