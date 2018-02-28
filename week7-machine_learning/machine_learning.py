@@ -179,15 +179,28 @@ def word_length(in_Text):
     return average_length
 
 
-"""
-swear words
+def swearing(in_Text):
+    """
+    Measure of swear words in input Text
+    """
+    regex = r'(?:(fuck(?:ing|er)?))'
+    swear_count = len([i for i in in_Text if re.match(regex, i, re.I)])
+    return swear_count / len(in_Text)
 
-"""
+
+def donkey(in_Text):
+    """
+    Measuer of swear words in input Text
+    """
+    regex = r'(ass(?:hole)?)'
+    swear2_count = len([i for i in in_Text if re.match(regex, i, re.I)])
+    return swear2_count / len(in_Text)
+
 
 # add feature names HERE
 feat_names = ['ttr', '1st-pro', '2nd-pro', '3rd-pro', 'punct', 'exclam',
               'quest', 'sentiment', 'avg sent length', 'avg word length',
-              'genre']
+              'swear words', 'donkey presence', 'genre']
 with open('mc_feat_names.txt', 'w') as name_file:
     name_file.write('\t'.join(feat_names))
 
@@ -203,7 +216,8 @@ with open('mc_features.csv', 'w') as out_file:
         print(ttr(tok_text), pro1_tr(tok_text), pro2_tr(tok_text),
               pro3_tr(tok_text), punct_tr(tok_text), punct_ex(tok_text),
               punct_quest(tok_text), sentiment(text), sent_length(sent_tok),
-              word_length(tok_text), subcorp(f), sep=',', file=out_file)
+              word_length(tok_text), swearing(tok_text), donkey(tok_text),
+              subcorp(f), sep=',', file=out_file)
     print()  # newline after progress dots
 
 ###############################################################################
