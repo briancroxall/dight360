@@ -33,6 +33,7 @@ from string import punctuation as punct  # string of common punctuation chars
 import matplotlib.pyplot as plt
 import nltk
 from nltk.sentiment.vader import SentimentIntensityAnalyzer as sia
+import numpy
 import pandas
 from pandas.tools.plotting import scatter_matrix
 from sklearn import model_selection
@@ -135,24 +136,38 @@ def punct_quest(in_Text):
     quest_count = len([q for q in in_Text if re.match(r'(\?+)', q)])
     return quest_count / len(in_Text)
 
-def sentiment(in_Text):
+def sentiment(in_doc):
     """
     Computer sentiment analysis markes for input Text. 
     
-    in_Text -- nltk.Text object or list of strings
+    in_doc -- cleaned text 
     """
     sent_ana = sia()
-    ps = sent_ana.polarity_scores(in_Text)['compound']
+    ps = sent_ana.polarity_scores(in_doc)['compound']
     return ps
+
+def sent_length(sentences):
+    """
+    Measure the average sentence length in a particular file.
+    
+    sentences -- nltk.Text object or list of strings
+    
+    """
+    sent_len = [] 
+    for sentence in sentences:
+        length = [len(sentence)]
+        sent_len.extend(length)
+    average_length = numpy.mean(sent_len)
+    return average_length
     
 """
-sentence length, word length, sentiment, swear words
+sentence length, word length, swear words
 
 """
 
 # add feature names HERE
 feat_names = ['ttr', '1st-pro', '2nd-pro', '3rd-pro', 'punct', 'exclam', 
-              'quest', 'sentiment', 'genre']
+              'quest', 'sentiment', 'avg sent length', 'genre']
 with open('mc_feat_names.txt', 'w') as name_file:
     name_file.write('\t'.join(feat_names))
 
@@ -162,12 +177,13 @@ with open('mc_features.csv', 'w') as out_file:
         with open(f) as the_file:
             text = clean(the_file)  # creates a cleaned version of text
             lowered_text = text.lower()  # lowercase the cleaned text 
+        sent_tok = nltk.sent_tokenize(text)
         tok_text = nltk.word_tokenize(lowered_text)
         # call the function HERE
         print(ttr(tok_text), pro1_tr(tok_text), pro2_tr(tok_text),
               pro3_tr(tok_text), punct_tr(tok_text), punct_ex(tok_text), 
-              punct_quest(tok_text), sentiment(text), subcorp(f),
-              sep=',', file=out_file)
+              punct_quest(tok_text), sentiment(text), sent_length(sent_tok), 
+              subcorp(f), sep=',', file=out_file)
     print()  # newline after progress dots
 
 ###############################################################################
