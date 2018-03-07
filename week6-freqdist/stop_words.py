@@ -98,15 +98,20 @@ function_words = ['A', 'ABOUT', 'ABOVE', 'AFTER', 'AGAIN', 'AGO ALL', 'ALMOST',
                   'WOULDN\'T', 'YES', 'YESTERDAY', 'YET', 'YOU', 'YOUR',
                   'YOU\'D', 'YOU\'LL', 'YOU\'RE', 'YOURS', 'YOURSELF',
                   'YOURSELVES', 'YOU\'VE']
+
+files = ['IN', 'IP', 'LY', 'NA', 'OP', 'SP']
 stop_words = set([word.lower() for word in function_words])
 
-with open('IN.txt', 'w') as my_file:
-    for each in glob('Mini-CORE/1+IN*.txt'):
-        with open(each, 'r') as read_file:
-            fd = FreqDist()
-            text = read_file.read().lower()
-            cleaned_text = clean(text)
-            tokens = nltk.word_tokenize(cleaned_text)
-            tokens_fd = FreqDist(tokens)
-            fd.update(tokens_fd)
+for file in files:
+    with open(file + '.txt', 'w') as my_file:
+        for each in glob('Mini-CORE/1+' + file + '*.txt'):
+#     for each in glob('Mini-CORE/1+', files, '*.txt'):
+            with open(each, 'r') as read_file:
+                fd = FreqDist()
+                text = read_file.read().lower()
+                cleaned_text = clean(text)
+                tokens = nltk.word_tokenize(cleaned_text)
+                words = [token for token in tokens if token not in stop_words]
+                tokens_fd = FreqDist(words)
+                fd.update(tokens_fd)
         print(fd.most_common(), file=my_file)
